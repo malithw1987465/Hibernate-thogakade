@@ -20,10 +20,10 @@ import lk.ijse.thogakade.dto.CartDTO;
 import lk.ijse.thogakade.dto.Customer;
 import lk.ijse.thogakade.dto.Item;
 import lk.ijse.thogakade.dto.tm.CartTM;
-import lk.ijse.thogakade.model.CustomerModel;
-import lk.ijse.thogakade.model.ItemModel;
-import lk.ijse.thogakade.model.OrderModel;
-import lk.ijse.thogakade.model.PlaceOrderModel;
+import lk.ijse.thogakade.Repository.CustomerModel;
+import lk.ijse.thogakade.Repository.ItemModel;
+import lk.ijse.thogakade.Repository.OrderModel;
+import lk.ijse.thogakade.Repository.PlaceOrderModel;
 
 import java.io.IOException;
 import java.net.URL;

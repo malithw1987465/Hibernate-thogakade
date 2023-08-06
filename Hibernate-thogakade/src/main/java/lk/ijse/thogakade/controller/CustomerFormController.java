@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.thogakade.dto.Customer;
 import lk.ijse.thogakade.dto.tm.CustomerTM;
-import lk.ijse.thogakade.model.CustomerModel;
+import lk.ijse.thogakade.Repository.CustomerModel;
 
 import java.io.IOException;
 import java.sql.*;

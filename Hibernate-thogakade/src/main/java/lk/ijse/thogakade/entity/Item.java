@@ -3,9 +3,14 @@ package lk.ijse.thogakade.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
-
+@Entity
+@Table(name = "Item")
 public class Item {
+    @Id
     @Column(name="item_id")
     private int id;
     @Column(name = "item_description")

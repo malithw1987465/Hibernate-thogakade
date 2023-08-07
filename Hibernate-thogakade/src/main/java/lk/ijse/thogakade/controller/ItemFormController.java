@@ -2,13 +2,9 @@ package lk.ijse.thogakade.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.thogakade.entity.Item;
 import lk.ijse.thogakade.repository.ItemRepository;
 
@@ -47,12 +43,12 @@ public class ItemFormController {
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
-
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.setTitle("Dashboard");
-        stage.setScene(new Scene(parent));
-        stage.centerOnScreen();
+//        Parent parent = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+//
+//        Stage stage = (Stage) root.getScene().getWindow();
+//        stage.setTitle("Dashboard");
+//        stage.setScene(new Scene(parent));
+//        stage.centerOnScreen();
     }
 
     @FXML
@@ -79,13 +75,13 @@ public class ItemFormController {
         Item item=getItem();
         ItemRepository itemRepository=new ItemRepository();
 
-        int savedCusId=itemRepository.saveItem(item);
-        System.out.println("Saved customer id:" + savedCusId);
+        int savedItemId=itemRepository.saveItem(item);
+        System.out.println("Saved item id:" + savedItemId);
     }
 
     private Item getItem() {
         Item  item=new Item();
-//        item.setId(txtId.getText());
+        //item.setId(Integer.parseInt(txtCode.getText()));
         item.setDescription(txtDescription.getText());
         item.setUnitPrice(Double.valueOf(txtUnitPrice.getText()));
         item.setQtyOnHand(txtQtyOnHand.getText());

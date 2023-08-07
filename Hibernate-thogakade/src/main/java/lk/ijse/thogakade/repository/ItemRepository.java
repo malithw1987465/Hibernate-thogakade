@@ -1,7 +1,6 @@
 package lk.ijse.thogakade.repository;
 
 import lk.ijse.thogakade.config.SessionFactoryConfig;
-import lk.ijse.thogakade.entity.Customer;
 import lk.ijse.thogakade.entity.Item;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,15 +32,15 @@ public class ItemRepository {
 
     }
 
-    public Customer getItem(int id){
-
-        try{
-            return session.get(Customer.class,1);
-        }catch (Exception e){
-            e.printStackTrace();
-            throw e;
-        }
-    }
+//    public Customer getItem(Item id){
+//
+//        try{
+//            return session.get(Customer.class,1);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            throw e;
+//        }
+//    }
 
     public boolean  updateItem(Item item){
         Transaction transaction = session.beginTransaction();

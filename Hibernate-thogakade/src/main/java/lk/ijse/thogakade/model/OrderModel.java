@@ -1,4 +1,4 @@
-package lk.ijse.thogakade.Repository;
+package lk.ijse.thogakade.model;
 
 
 

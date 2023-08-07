@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.thogakade.Repository.ItemModel;
+import lk.ijse.thogakade.model.ItemModel;
 
 import java.io.IOException;
 import java.sql.SQLException;

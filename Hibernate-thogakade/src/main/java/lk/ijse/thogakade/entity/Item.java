@@ -1,16 +1,21 @@
 package lk.ijse.thogakade.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.Column;
+import java.sql.Timestamp;
 
 public class Item {
-    @Column
+    @Column(name="item_id")
     private int id;
-    @Column
+    @Column(name = "item_description")
     private String description;
-    @Column
+    @Column(name = "unit_price")
     private int unitPrice;
-    @Column
+    @Column(name = "quantity_on_hand")
     private int qtyOnHand;
+    @CreationTimestamp
+    private Timestamp createdDateTime;
 
     public Item() {
     }

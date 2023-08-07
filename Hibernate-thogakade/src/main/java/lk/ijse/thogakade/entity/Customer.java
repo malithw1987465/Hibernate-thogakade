@@ -1,26 +1,41 @@
 package lk.ijse.thogakade.entity;
 
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+
 @Entity
 @Table(name = "customer")
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private int id;
-    @Column(name = "cusomer_name")
+
+    @Column(name = "customer_name")
     private String name;
+
     @Column(name = "customer_address")
     private String address;
-    @Column(name ="customer_salary")
+
+    @Column(name = "salary")
     private Double salary;
+
     @CreationTimestamp
     private Timestamp createdDateTime;
+
+    public Customer(int id, String name, String address, Double salary) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.salary = salary;
+    }
+
+    public Customer() {
+    }
 
     public int getId() {
         return id;
@@ -54,15 +69,14 @@ public class Customer {
         this.salary = salary;
     }
 
-    public Customer() {
-    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", salary=" + salary + '}';
+}
 
 
-
-    public Customer(int id, String name, String address, Double salary) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.salary = salary;
-    }
 }

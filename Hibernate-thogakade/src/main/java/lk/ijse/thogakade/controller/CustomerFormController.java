@@ -3,11 +3,15 @@ package lk.ijse.thogakade.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.thogakade.dto.tm.CustomerTM;
 import lk.ijse.thogakade.entity.Customer;
 import lk.ijse.thogakade.repository.CustomerRepository;
@@ -17,17 +21,21 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-//import lk.ijse.thogakade.dto.Customer;
-//import lk.ijse.thogakade.Repository.CustomerModel;
+//import lk.ijse.thogakade.entity.Customer;
+//import lk.ijse.thogakade.dto.tm.CustomerTM;
+//import lk.ijse.thogakade.model.CustomerModel;
 
 public class CustomerFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/Thogakade";
+    private static final String URL = "jdbc:mysql://localhost:3306/thogakade";
     private static final Properties props = new Properties();
 
     static {
         props.setProperty("user", "root");
         props.setProperty("password", "1234");
     }
+//
+//    Customer customer=getCustomer();
+//    CustomerRepository customerRepository=new CustomerRepository();
 
     public TableView<CustomerTM> tblCustomer;
 
@@ -62,12 +70,12 @@ public class CustomerFormController implements Initializable {
     private TextField txtSalary;
 
 
-    @Override
-    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+//    @Override
+//    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
 //        setCellValueFactory();
 //        getAll();
-    }
-
+//    }
+//
 //    private void setCellValueFactory() {
 //        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
 //        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -97,21 +105,21 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
-//        Parent parent = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setTitle("Dashboard");
+        stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
+    }
+
+//    @FXML
+//    void btnClearOnAction(ActionEvent event) {
 //
-//        Stage stage = (Stage) root.getScene().getWindow();
-//        stage.setTitle("Dashboard");
-//        stage.setScene(new Scene(parent));
-//        stage.centerOnScreen();
-    }
-
-    @FXML
-    void btnClearOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) throws SQLException {
+//    }
+//
+//    @FXML
+//    void btnDeleteOnAction(ActionEvent event) throws SQLException {
 //        String id = txtId.getText();
 //        try (Connection con = DriverManager.getConnection(URL, props)) {
 //            String sql = "DELETE FROM Customer WHERE id = ?";
@@ -123,50 +131,76 @@ public class CustomerFormController implements Initializable {
 //                new Alert(Alert.AlertType.CONFIRMATION, "deletd!").show();
 //            }
 //        }
-    }
+//    }
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException {
-        Customer customer = getCustomer();
 
-        // 1. Save
-        CustomerRepository cusRepository = new CustomerRepository();
-        int savedCusId = cusRepository.saveCustomer(customer);
-        System.out.println("Saved Cus Id: " + savedCusId);
-//        String id = txtId.getText();
-//        String name = txtName.getText();
-//        String address = txtAddress.getText();
-//        double salary = Double.parseDouble(txtSalary.getText());
-//
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "INSERT INTO Customer(id, name, address, salary)" +
-//                    "VALUES(?, ?, ?, ?)";
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, id);
-//            pstm.setString(2, name);
-//            pstm.setString(3, address);
-//            pstm.setDouble(4, salary);
-//
-//            int affectedRows = pstm.executeUpdate();
-//            if (affectedRows > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION,
-//                        "huree!! customer added :)")
-//                        .show();
-//            }
-//        }
+        Customer customer=getCustomer();
+        CustomerRepository customerRepository=new CustomerRepository();
 
+        int savedCusId=customerRepository.saveCustomer(customer);
+        System.out.println("Saved customer id:" + savedCusId);
     }
 
     private Customer getCustomer() {
-        Customer customer = new Customer();
+        Customer customer=new Customer();
         customer.setName(txtName.getText());
         customer.setAddress(txtAddress.getText());
         customer.setSalary(Double.valueOf(txtSalary.getText()));
+
         return customer;
     }
 
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void codeSearchOnAction(ActionEvent event) {
+    }
+
+    public void btnDeleteOnAction(ActionEvent event) {
+        int customerId= Integer.parseInt(txtId.getText());
+        CustomerRepository customerRepository=new CustomerRepository();
+        Customer existingCustomer=customerRepository.getCustomer(customerId);
+
+        boolean isDeleted=customerRepository.deleteCustomer(existingCustomer);
+        if(isDeleted){
+            System.out.println("Customer Deleted");
+        }else{
+            System.out.println("not deleted");
+        }
+
+    }
+
+    public void btnUpdateOnAction(ActionEvent event) {
+        CustomerRepository customerRepository=new CustomerRepository();
+        Customer customer=findCustomer();
+        boolean isUpdated=customerRepository.updateCustomer(customer);
+
+        if(isUpdated){
+            System.out.println("Customer updated");
+        }else{
+            System.out.println("not updated");
+        }
+    }
+
+    private Customer findCustomer() {
+        Customer customer=new Customer();
+        customer.setId(Integer.parseInt(txtId.getText()));
+        customer.setName(txtName.getText());
+        customer.setAddress(txtAddress.getText());
+        customer.setSalary(Double.valueOf(txtSalary.getText()));
+
+        return customer;
+    }
+
+    public void btnClearOnAction(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+
+    }
+
+//    @FXML
+//    void btnUpdateOnAction(ActionEvent event) throws SQLException {
 //        String id = txtId.getText();
 //        String name = txtName.getText();
 //        String address = txtAddress.getText();
@@ -185,10 +219,10 @@ public class CustomerFormController implements Initializable {
 //                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
 //            }
 //        }
-    }
+//    }
 
-    @FXML
-    void codeSearchOnAction(ActionEvent event) throws SQLException {
+//    @FXML
+//    void codeSearchOnAction(ActionEvent event) throws SQLException {
 //        String id = txtId.getText();
 //
 //        try (Connection con = DriverManager.getConnection(URL, props)) {
@@ -208,7 +242,7 @@ public class CustomerFormController implements Initializable {
 //                txtAddress.setText(cus_address);
 //                txtSalary.setText(String.valueOf(cus_salary));
 //            }
-//        }
-    }
+//    }
+//}
 
 }

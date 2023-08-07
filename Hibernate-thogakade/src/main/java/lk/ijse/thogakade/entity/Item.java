@@ -11,7 +11,7 @@ public class Item {
     @Column(name = "item_description")
     private String description;
     @Column(name = "unit_price")
-    private int unitPrice;
+    private Double unitPrice;
     @Column(name = "quantity_on_hand")
     private int qtyOnHand;
     @CreationTimestamp
@@ -23,7 +23,7 @@ public class Item {
     public Item(int id, String description, int unitPrice, int qtyOnHand) {
         this.id = id;
         this.description = description;
-        this.unitPrice = unitPrice;
+        this.unitPrice = Double.valueOf(unitPrice);
         this.qtyOnHand = qtyOnHand;
     }
 
@@ -43,20 +43,20 @@ public class Item {
         this.description = description;
     }
 
-    public int getUnitPrice() {
-        return unitPrice;
+    public Double getUnitPrice() {
+        return Double.valueOf(unitPrice);
     }
 
-    public void setUnitPrice(int unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public int getQtyOnHand() {
-        return qtyOnHand;
+    public String getQtyOnHand() {
+        return String.valueOf(qtyOnHand);
     }
 
-    public void setQtyOnHand(int qtyOnHand) {
-        this.qtyOnHand = qtyOnHand;
+    public void setQtyOnHand(String qtyOnHand) {
+        this.qtyOnHand = Integer.parseInt(qtyOnHand);
     }
 
     @Override

@@ -164,7 +164,7 @@ public class CustomerFormController implements Initializable {
         if(isDeleted){
             System.out.println("Customer Deleted");
         }else{
-            System.out.println("not deleted");
+            System.out.println("Customer Deletion Failed");
         }
 
     }

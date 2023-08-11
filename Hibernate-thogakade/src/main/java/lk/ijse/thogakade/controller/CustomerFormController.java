@@ -1,6 +1,5 @@
 package lk.ijse.thogakade.controller;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.thogakade.dto.tm.CustomerTM;
 import lk.ijse.thogakade.entity.Customer;
 import lk.ijse.thogakade.repository.CustomerRepository;
 
@@ -37,7 +34,6 @@ public class CustomerFormController implements Initializable {
 //    Customer customer=getCustomer();
 //    CustomerRepository customerRepository=new CustomerRepository();
 
-    public TableView<CustomerTM> tblCustomer;
 
     @FXML
     private TableColumn<?, ?> colAction;
@@ -164,7 +160,7 @@ public class CustomerFormController implements Initializable {
         if(isDeleted){
             System.out.println("Customer Deleted");
         }else{
-            System.out.println("Customer Deletion Failed");
+            System.out.println("not deleted");
         }
 
     }
@@ -242,7 +238,7 @@ public class CustomerFormController implements Initializable {
 //                txtAddress.setText(cus_address);
 //                txtSalary.setText(String.valueOf(cus_salary));
 //            }
+//        }
 //    }
-//}
 
 }

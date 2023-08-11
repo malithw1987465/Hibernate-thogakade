@@ -75,8 +75,9 @@ public class Customer {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", salary=" + salary + '}';
-}
+                ", salary=" + salary +
+                '}';
+    }
 
 
 }

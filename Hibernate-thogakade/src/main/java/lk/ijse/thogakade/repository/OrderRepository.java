@@ -1,27 +1,28 @@
 package lk.ijse.thogakade.repository;
 
-import lk.ijse.thogakade.entity.Customer;
 import lk.ijse.thogakade.config.SessionFactoryConfig;
+import lk.ijse.thogakade.entity.Cart;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class CustomerRepository {
+public class OrderRepository {
+
     private final Session session;
 
-    public CustomerRepository(){
+    public OrderRepository(){
         session= SessionFactoryConfig.getInstance().getSession();
     }
 
-    public int saveCustomer(Customer customer){
+    public int saveOrder(Cart cart){
         Transaction transaction=session.beginTransaction();
 
         try{
 
-            int customerId= (int) session.save(customer);
+            int orderId= (int) session.save(cart);
             transaction.commit();
             session.close();
 
-            return customerId;
+            return orderId;
 
         }catch (Exception e){
             transaction.rollback();
@@ -32,21 +33,21 @@ public class CustomerRepository {
 
     }
 
-    public Customer getCustomer(int id){
+    public Cart getOrder(int id){
 
         try{
-            return session.get(Customer.class,1);
+            return session.get(Cart.class,id);
         }catch (Exception e){
             e.printStackTrace();
             throw e;
         }
     }
 
-    public boolean  updateCustomer(Customer customer){
+    public boolean  updateOrder(Cart cart){
         Transaction transaction = session.beginTransaction();
         try {
 
-            session.update(customer);
+            session.update(cart);
             transaction.commit();
             session.close();
             return true;
@@ -58,11 +59,11 @@ public class CustomerRepository {
         }
     }
 
-    public boolean deleteCustomer(Customer customer){
+    public boolean deleteOrder(Cart cart){
         Transaction transaction= session.beginTransaction();
 
         try{
-            session.delete(customer);
+            session.delete(cart);
             transaction.commit();
             session.close();
             return true;
@@ -73,7 +74,5 @@ public class CustomerRepository {
             return false;
         }
     }
-
-
 
 }

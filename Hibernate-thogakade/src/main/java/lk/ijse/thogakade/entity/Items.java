@@ -2,42 +2,47 @@ package lk.ijse.thogakade.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
+
 @Entity
-@Table(name = "Item")
-public class Item {
+@Table(name = "items")
+public class Items {
+
     @Id
-    @Column(name="item_id")
-    private int id;
-    @Column(name = "item_description")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_code")
+    private int code;
+
+    @Column(name = "description")
     private String description;
+//    private double unitPrice;
+
     @Column(name = "unit_price")
     private Double unitPrice;
-    @Column(name = "quantity_on_hand")
-    private int qtyOnHand;
+
+    @Column(name = "quantity")
+    private Integer qtyOnHand;
+
     @CreationTimestamp
     private Timestamp createdDateTime;
 
-    public Item() {
-    }
-
-    public Item(int id, String description, int unitPrice, int qtyOnHand) {
-        this.id = id;
+    public Items(int code, String description, Double unitPrice, Integer qtyOnHand) {
+        this.code = code;
         this.description = description;
-        this.unitPrice = Double.valueOf(unitPrice);
+        this.unitPrice = unitPrice;
         this.qtyOnHand = qtyOnHand;
     }
 
-    public int getId() {
-        return id;
+    public Items() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -49,28 +54,30 @@ public class Item {
     }
 
     public Double getUnitPrice() {
-        return Double.valueOf(unitPrice);
+        return unitPrice;
     }
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public String getQtyOnHand() {
-        return String.valueOf(qtyOnHand);
+    public Integer getQtyOnHand() {
+        return qtyOnHand;
     }
 
-    public void setQtyOnHand(String qtyOnHand) {
-        this.qtyOnHand = Integer.parseInt(qtyOnHand);
+    public void setQtyOnHand(Integer qtyOnHand) {
+        this.qtyOnHand = qtyOnHand;
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "id=" + id +
+                "code='" + code + '\'' +
                 ", description='" + description + '\'' +
                 ", unitPrice=" + unitPrice +
                 ", qtyOnHand=" + qtyOnHand +
                 '}';
     }
+
+
 }

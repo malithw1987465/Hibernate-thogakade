@@ -1,9 +1,5 @@
 package lk.ijse.thogakade.controller;
 
-/*
-    @author DanujaV
-    @created 3/14/23 - 9:05 AM   
-*/
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,9 +52,8 @@ public class DashboardFormController {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) throws IOException {
-        Parent anchorPane = FXMLLoader
-                .load(getClass()
-                        .getResource("/view/place_order_form.fxml"));
+        Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/place_order_form.fxml"));
+
 
         Scene scene = new Scene(anchorPane);
         Stage stage = (Stage) root.getScene().getWindow();
